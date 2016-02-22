@@ -1,3 +1,6 @@
+## makeCacheMatrix is following
+
+
 makeCacheMatrix <- function(x = matrix()) {
   m <- NULL
   set <- function(y) {
@@ -10,4 +13,18 @@ makeCacheMatrix <- function(x = matrix()) {
   list(set = set, get = get,
        setprime = setprime,
        getprime = getprime)
+}
+
+## cacheSolve is following
+
+cacheSolve <- function(x, ...) {
+  m <- x$getprime()
+  if(!is.null(m)) {
+    message("getting cached data")
+    return(m)
+  }
+  data <- x$get()
+  m <- sovlve(data, ...)
+  x$setprime(m)
+  m
 }
